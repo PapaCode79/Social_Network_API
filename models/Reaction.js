@@ -2,11 +2,17 @@ const { Schema, model } = require('mongoose')
 
 const thoughtSchema = new Schema(
     {
-        ReactionId: {
+        reactionId: {
             type: String,
             required: true,
-            minlength: 1,
-            maxlength: 280
+            
+        },
+
+        reactionBody: {
+            type: String,
+            required: true,
+            maxcharacter: 280
+
         },
 
         username: {
@@ -30,15 +36,5 @@ const thoughtSchema = new Schema(
 
 );
 
-thoughtSchema.virtual('reactionCount').get(function () {
-    return this.friends.length
-})
-
-
-function formatDate(date) {
-    return (new Date(date)).toString();
-}
-
-const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought
